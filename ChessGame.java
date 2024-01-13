@@ -48,11 +48,12 @@ private Piece[][] chessboard;
                 displayChessboard();
                 System.out.println(isWhiteTurn ? "White's turn" : "Black's turn");
                 System.out.print("Enter your move (e.g., e2 to e4): ");
+                System.out.println(getPieceAtPosition("a1"));
                 String move = scanner.nextLine();
 
                 if (isValidMove(move)) {
                     makeMove(move);
-                    isWhiteTurn = !isWhiteTurn;  // Switch turns after a valid move
+                    isWhiteTurn = !isWhiteTurn;  // works
                 } else {
                     System.out.println("Invalid move. Try again.");
                 }
@@ -61,16 +62,8 @@ private Piece[][] chessboard;
         }
 
         private boolean isValidMove(String move) {
-            if (endingHasPiece()) {
-                if (pieceIsSameColour(move)) {
-                    return false;
-                }
-                //remove other piece
-            }
-            if (incorrectPieceMove()) {
-                return false;
-            }
-            return move.matches("[A-Ha-h][1-8] to [A-Ha-h][1-8]");
+            //tim code
+            return move.matches("[A-Ha-h][1-8] to [A-Ha-h][1-8]"); //works
         }
 
         private void makeMove(String move) {
@@ -78,7 +71,7 @@ private Piece[][] chessboard;
             String startingSquare = squares[0];
             String endingSquare = squares[1];
             System.out.println("Move: " + move);
-            //move pawn
+
         }
 
         private boolean endingHasPiece() {
@@ -93,14 +86,16 @@ private Piece[][] chessboard;
         private boolean pieceIsSameColour(String move) {
             String[] squares = move.split(" to ");
             String piece = squares[0];
-            if (Character.isUpperCase(getPieceAtPosition(piece))) {
-            }
+//            if (Character.isUpperCase(getPieceAtPosition(piece))) {
+//            }
             return true;
         }
 
         public char getPieceAtPosition(String position) {
+
             int row = Integer.parseInt(position.substring(1, 2));
             int col = position.charAt(0) - 'a';
+            System.out.println(row + "  " + col);
 
             // Check if the position is within the chessboard bounds
             if (row >= 0 && row <= 7 && col >= 0 && col <= 7) {
