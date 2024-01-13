@@ -23,6 +23,10 @@ public class ChessGame {
                 chessboard[6][i] = PieceFactory.createPawn('P');
 
             }
+            chessboard[4][1] = PieceFactory.createKnight('N');
+            chessboard[4][2] = PieceFactory.createBishop('B');
+            chessboard[4][3] = PieceFactory.createKing('K');
+            chessboard[4][4] = PieceFactory.createQueen('Q');
         }
 
         public void start() {
