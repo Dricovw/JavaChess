@@ -1,19 +1,28 @@
 import java.util.Scanner;
-    public class ChessGame {
-        private char[][] chessboard;
+//package chess.game;
+
+import pieces.Piece;
+import pieces.PieceFactory;
+public class ChessGame {
+//        private char[][] chessboard;
+private Piece[][] chessboard;
 
         public ChessGame() {
             // Initialize the chessboard
-            chessboard = new char[][] {
-                    {'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
-                    {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
-                    {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                    {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                    {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                    {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                    {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
-                    {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'}
-            };
+            chessboard = new Piece[8][8];
+            chessboard[1][0] = PieceFactory.createPawn('p');
+            chessboard[6][0] = PieceFactory.createPawn('P');
+
+//            chessboard = new char[][] {
+//                    {'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
+//                    {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
+//                    {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//                    {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//                    {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//                    {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//                    {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
+//                    {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'}
+//            };
         }
 
         public void start() {
