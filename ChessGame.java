@@ -112,9 +112,9 @@ private Piece[][] chessboard;
         private void displayChessboard() {
             System.out.println("  a b c d e f g h");
             System.out.println(" +----------------");
-            for (int i = 0; i < 8; i++) {
+            for (int i = 7; i >= 0; i--) {
                 System.out.print(8 - i + "| ");
-                for (int j = 0; j < 8; j++) {
+                for (int j = 7; j >= 0; j--) {
                     System.out.print(chessboard[i][j] + " ");
                 }
                 System.out.println("| " + (8 - i));
