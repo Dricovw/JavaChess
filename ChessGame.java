@@ -17,6 +17,7 @@ private Piece[][] chessboard;
         private void initializeChessboard() {
             chessboard = new Piece[8][8];
             chessboard[0][0] = PieceFactory.createPawn('p');
+            chessboard[7][7] = PieceFactory.createRook('R');
 
 //            for (int i = 0; i < 8; i++) {
 //                for (int j = 0; j < 8; j++) {

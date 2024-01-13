@@ -1,11 +1,9 @@
 package pieces;
 
-import pieces.Piece;
-
 public class Pawn implements Piece {
     private char symbol;
 
-    public void Pawn(char symbol) {
+    public Pawn(char symbol) {
         this.symbol = symbol;
     }
 
