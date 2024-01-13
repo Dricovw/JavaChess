@@ -2,6 +2,7 @@ package chessgame;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("Starting Chess Game...");
         // Usage of design patterns
         ChessGame chessGame = ChessGame.getInstance();
 
@@ -18,5 +19,7 @@ public class Main {
         // Display the updated chessboard
         System.out.println("Updated Chessboard:");
         chessBoard.displayBoard();
+        System.out.println("Chess Game finished successfully.");
+
     }
 }
