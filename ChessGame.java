@@ -32,8 +32,6 @@ public class ChessGame {
                 displayChessboard();
                 System.out.println(isWhiteTurn ? "White's turn" : "Black's turn");
                 System.out.print("Enter your move (e.g., e2 to e4): ");
-
-
                 String move = scanner.nextLine();
 
                 if (PieceMove.isValidMove(move)) {
