@@ -88,18 +88,17 @@ private Piece[][] chessboard;
         private boolean pieceIsSameColour(String move) {
             String[] squares = move.split(" to ");
             String piece = squares[0];
-//            if (Character.isUpperCase()) {
-//
-//            }
+            if (Character.isUpperCase(getPieceAtPosition(piece))) {
+            }
             return true;
         }
 
         public char getPieceAtPosition(String position) {
-            int row = 8 - Integer.parseInt(position.substring(1, 2));
+            int row = Integer.parseInt(position.substring(1, 2));
             int col = position.charAt(0) - 'a';
 
             // Check if the position is within the chessboard bounds
-            if (row >= 0 && row <= 8 && col >= 0 && col <= 8) {
+            if (row >= 0 && row <= 7 && col >= 0 && col <= 7) {
                 return chessboard[row][col].getSymbol();
             } else {
                 throw new IllegalArgumentException("Invalid position: " + position);
@@ -110,12 +109,12 @@ private Piece[][] chessboard;
         System.out.println("  a b c d e f g h");
         System.out.println(" +----------------");
         for (int i = 0; i < 8; i++) {
-            System.out.print(8 - i + "| ");
+            System.out.print(i + 1 + "| ");
             for (int j = 0; j < 8; j++) {
                 Piece piece = chessboard[i][j];
                 System.out.print(piece != null ? piece.getSymbol() + " " : "  ");  // Check for null
             }
-            System.out.println("| " + (8 - i));
+            System.out.println("| " + (i + 1));
         }
         System.out.println(" +----------------");
         System.out.println("  a b c d e f g h");
