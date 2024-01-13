@@ -17,9 +17,7 @@ private Piece[][] chessboard;
         private void initializeChessboard() {
             chessboard = new Piece[8][8];
             chessboard[0][0] = PieceFactory.createPawn('p');
-            chessboard[0][7] = PieceFactory.createPawn('K');
-            chessboard[7][0] = PieceFactory.createPawn('B');
-            chessboard[7][7] = PieceFactory.createPawn('K');
+
 //            for (int i = 0; i < 8; i++) {
 //                for (int j = 0; j < 8; j++) {
 //                    chessboard[i][j] = PieceFactory.createPawn('p');
@@ -74,9 +72,8 @@ private Piece[][] chessboard;
             String[] squares = move.split(" to ");
             String startingSquare = squares[0];
             String endingSquare = squares[1];
-
-
             System.out.println("Move: " + move);
+            //move pawn
         }
 
         private boolean endingHasPiece() {
@@ -85,7 +82,7 @@ private Piece[][] chessboard;
         }
 
         private boolean incorrectPieceMove() {
-            return true;
+            return false;
         }
 
         private boolean pieceIsSameColour(String move) {
@@ -112,12 +109,12 @@ private Piece[][] chessboard;
         private void displayChessboard() {
             System.out.println("  a b c d e f g h");
             System.out.println(" +----------------");
-            for (int i = 7; i >= 0; i--) {
-                System.out.print(8 - i + "| ");
-                for (int j = 7; j >= 0; j--) {
+            for (int i = 0; i < 8; i++) {
+                System.out.print(i + 1 + "| ");
+                for (int j = 0; j < 8; j++) {
                     System.out.print(chessboard[i][j] + " ");
                 }
-                System.out.println("| " + (8 - i));
+                System.out.println("| " + (i + 1));
             }
             System.out.println(" +----------------");
             System.out.println("  a b c d e f g h");
