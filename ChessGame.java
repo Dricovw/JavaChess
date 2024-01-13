@@ -109,17 +109,20 @@ private Piece[][] chessboard;
             }
         }
 
-        private void displayChessboard() {
-            System.out.println("  a b c d e f g h");
-            System.out.println(" +----------------");
-            for (int i = 0; i < 8; i++) {
-                System.out.print(8 - i + "| ");
-                for (int j = 0; j < 8; j++) {
-                    System.out.print(chessboard[i][j] + " ");
-                }
-                System.out.println("| " + (8 - i));
+    private void displayChessboard() {
+        System.out.println("  a b c d e f g h");
+        System.out.println(" +----------------");
+        for (int i = 0; i < 8; i++) {
+            System.out.print(8 - i + "| ");
+            for (int j = 0; j < 8; j++) {
+                Piece piece = chessboard[i][j];
+                System.out.print(piece != null ? piece.getSymbol() + " " : "  ");  // Check for null
             }
-            System.out.println(" +----------------");
-            System.out.println("  a b c d e f g h");
+            System.out.println("| " + (8 - i));
         }
+        System.out.println(" +----------------");
+        System.out.println("  a b c d e f g h");
+    }
+
+
     }
