@@ -17,7 +17,11 @@ private Piece[][] chessboard;
         private void initializeChessboard() {
             chessboard = new Piece[8][8];
             chessboard[0][0] = PieceFactory.createPawn('p');
-            chessboard[7][7] = PieceFactory.createRook('R');
+            chessboard[0][7] = PieceFactory.createRook('R');
+            chessboard[0][6] = PieceFactory.createKnight('N');
+            chessboard[0][5] = PieceFactory.createBishop('B');
+            chessboard[0][4] = PieceFactory.createKing('K');
+            chessboard[0][3] = PieceFactory.createQueen('Q');
 
 //            for (int i = 0; i < 8; i++) {
 //                for (int j = 0; j < 8; j++) {
