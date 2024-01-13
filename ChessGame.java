@@ -48,7 +48,7 @@ private Piece[][] chessboard;
                 displayChessboard();
                 System.out.println(isWhiteTurn ? "White's turn" : "Black's turn");
                 System.out.print("Enter your move (e.g., e2 to e4): ");
-                System.out.println(getPieceAtPosition("a1"));
+//                System.out.println(getPieceAtPosition("a1"));
                 String move = scanner.nextLine();
 
                 if (isValidMove(move)) {
