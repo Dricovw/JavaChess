@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 import pieces.Piece;
 import pieces.PieceFactory;
@@ -36,10 +35,6 @@ public class ChessGame {
             for (int i = 0; i < 8; i++) {
                 chessboard[6][i] = PieceFactory.createPawn('P');
             }
-            chessboard[4][1] = PieceFactory.createKnight('N');
-            chessboard[4][2] = PieceFactory.createBishop('B');
-            chessboard[4][3] = PieceFactory.createKing('K');
-            chessboard[4][4] = PieceFactory.createQueen('Q');
         }
 
         public void start() {
@@ -49,7 +44,8 @@ public class ChessGame {
                 displayChessboard();
                 System.out.println(isWhiteTurn ? "White's turn" : "Black's turn");
                 System.out.print("Enter your move (e.g., e2 to e4): ");
-//                System.out.print(ChessGame.getPieceAtPosition("b2"));
+                System.out.print(numberToPosition(5, 5));
+                System.out.print(positionToNumber("e5"));
                 String move = scanner.nextLine();
 
                 if (PieceMove.isValidMove(move)) {
@@ -62,23 +58,22 @@ public class ChessGame {
 
         }
 
-    public static char positionToNumber(String position) {
-        int row = Integer.parseInt(position.substring(1, 2)) - 1;
-        int col = position.charAt(0) - 'a';
-        System.out.print(row);
-        System.out.print(col);
+    public static String positionToNumber(String position) {
+        char file = position.charAt(0);
+        int rank = Character.getNumericValue(position.charAt(1));
 
         // Check if the position is within the chessboard bounds
-        if (row >= 0 && row <= 7 && col >= 0 && col <= 7) {
-            return chessboard[row][col].getSymbol();
+        if (file >= 'a' && file <= 'h' && rank >= 0 && rank <= 7) {
+//            return chessboard[row][col].getSymbol();
+           return file + "" + rank;
         } else {
             throw new IllegalArgumentException("Invalid position: " + position);
         }
     }
 
-    public static String numberToPosition(int row, int col) {
+    public static String numberToPosition(int col, int row) {
         char file = (char) ('a' + col);
-        int rank = 8 - row;
+        int rank = row + 1;
 
         if (row >= 0 && row <= 7 && col >= 0 && col <= 7) {
             return String.valueOf(file) + rank;
@@ -86,6 +81,18 @@ public class ChessGame {
             throw new IllegalArgumentException("Invalid position: ");
         }
     }
+
+    public static char positionToPiece(String position) {
+        int row = Integer.parseInt(position.substring(1, 2)) - 1;
+        int col = position.charAt(0) - 'a';
+
+        if (row >= 0 && row <= 7 && col >= 0 && col <= 7) {
+            return chessboard[row][col].getSymbol();
+        } else {
+            throw new IllegalArgumentException("Invalid position: " + position);
+        }
+    }
+
 
 
     private void displayChessboard() {

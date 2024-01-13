@@ -9,8 +9,8 @@ public class PieceMove {
         String[] squares = move.split(" to ");
         String startPos = squares[0];
         String endPos = squares[1];
-        Character pieceStart = ChessGame.positionToNumber(squares[0]);
-        Character pieceEnd = ChessGame.positionToNumber(squares[1]);
+        String pieceStart =  ChessGame.positionToNumber(squares[0]);
+        String pieceEnd = ChessGame.positionToNumber(squares[1]);
         //chessboard[][]
         System.out.println("Move: " + pieceStart + endPos );
     }
@@ -24,7 +24,7 @@ public class PieceMove {
         String[] squares = move.split(" to ");
         String oldpiece = squares[0];
         String newpiece = squares[1];
-        if (Character.isUpperCase(ChessGame.positionToNumber(oldpiece)) == Character.isUpperCase(ChessGame.positionToNumber(newpiece))) {
+        if (Character.isUpperCase(ChessGame.positionToPiece(ChessGame.positionToNumber(oldpiece))) == Character.isUpperCase(ChessGame.positionToPiece(ChessGame.positionToNumber(newpiece)))) {
             System.out.println("same piece");
             return false;
             }
