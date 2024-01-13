@@ -1,9 +1,9 @@
 import java.util.Scanner;
-import pieces.Piece;
+import pieces.ChessPiece;
 import pieces.PieceFactory;
 
 public class ChessGame {
-    private static Piece[][] chessboard;
+    private ChessPiece[][] chessboard;
     private boolean isWhiteTurn;
 
         public ChessGame() {
@@ -12,7 +12,8 @@ public class ChessGame {
         }
 
         private void initializeChessboard() {
-            chessboard = new Piece[8][8];
+            chessboard = new ChessPiece[8][8];
+            chessboard[0][0] = PieceFactory.createPawn('p');
             chessboard[7][7] = PieceFactory.createRook('R');
             chessboard[7][0] = PieceFactory.createRook('R');
             chessboard[0][7] = PieceFactory.createRook('r');
@@ -101,7 +102,7 @@ public class ChessGame {
         for (int i = 0; i < 8; i++) {
             System.out.print(i + 1 + "| ");
             for (int j = 0; j < 8; j++) {
-                Piece piece = chessboard[i][j];
+                ChessPiece piece = chessboard[i][j];
                 System.out.print(piece != null ? piece.getSymbol() + " " : "  ");  // Check for null
             }
             System.out.println("| " + (i + 1));

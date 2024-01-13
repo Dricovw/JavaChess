@@ -1,22 +1,17 @@
+// Bishop.java
 package pieces;
 
-public class Bishop implements Piece {
-    private char symbol;
-
+public class Bishop extends ChessPiece {
     public Bishop(char symbol) {
-        this.symbol = symbol;
+        super(symbol);
     }
 
     @Override
     public boolean isValidMove(int startX, int startY, int endX, int endY) {
-        // Bishop's move: Diagonal movement
+        // Implement specific bishop movement rules
+        // For simplicity, let's assume bishops move diagonally any number of squares
         int xDiff = Math.abs(endX - startX);
         int yDiff = Math.abs(endY - startY);
         return xDiff == yDiff;
-    }
-
-    @Override
-    public char getSymbol() {
-        return symbol;
     }
 }
