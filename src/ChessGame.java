@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-
+package chessgame;
 // Creational Design Pattern: Singleton Pattern
 class ChessGame {
     private static ChessGame instance;
