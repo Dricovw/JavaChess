@@ -1,5 +1,5 @@
 // BlackPieceFactory.java
-public class BlackPieceFactory implements PieceFactory {
+public class WhitePieceFactory implements PieceFactory {
     @Override
     public ChessPiece createPiece(String type) {
         switch (type) {
@@ -14,8 +14,8 @@ public class BlackPieceFactory implements PieceFactory {
     }
 }
 
-// BlackPawn.java
-public class BlackPawn implements ChessPiece {
+// WhitePawn.java
+public class WhitePawn implements ChessPiece {
     @Override
     public void move() {
         // Implementation for black pawn's movement
@@ -23,7 +23,7 @@ public class BlackPawn implements ChessPiece {
 }
 
 // BlackRook.java
-public class BlackRook implements ChessPiece {
+public class WhiteRook implements ChessPiece {
     @Override
     public void move() {
         // Implementation for black rook's movement
