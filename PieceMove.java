@@ -6,11 +6,13 @@ public class PieceMove {
     }
 
     public static void makeMove(String move) {
-        // Your move logic using the chessboard parameter
         String[] squares = move.split(" to ");
-        String startingSquare = squares[0];
-        String endingSquare = squares[1];
-        System.out.println("Move: " + move);
+        String startPos = squares[0];
+        String endPos = squares[1];
+        Character pieceStart = ChessGame.positionToNumber(squares[0]);
+        Character pieceEnd = ChessGame.positionToNumber(squares[1]);
+        //chessboard[][]
+        System.out.println("Move: " + pieceStart + endPos );
     }
 
     private boolean endingHasPiece() {
@@ -22,7 +24,7 @@ public class PieceMove {
         String[] squares = move.split(" to ");
         String oldpiece = squares[0];
         String newpiece = squares[1];
-        if (Character.isUpperCase(ChessGame.getPieceAtPosition(oldpiece)) == Character.isUpperCase(ChessGame.getPieceAtPosition(newpiece))) {
+        if (Character.isUpperCase(ChessGame.positionToNumber(oldpiece)) == Character.isUpperCase(ChessGame.positionToNumber(newpiece))) {
             System.out.println("same piece");
             return false;
             }
