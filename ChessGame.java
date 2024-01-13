@@ -3,7 +3,7 @@ import pieces.ChessPiece;
 import pieces.PieceFactory;
 
 public class ChessGame {
-    private ChessPiece[][] chessboard;
+    private static ChessPiece[][] chessboard;
     private boolean isWhiteTurn;
 
         public ChessGame() {
