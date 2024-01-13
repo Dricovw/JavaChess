@@ -1,20 +1,31 @@
-// ChessPieceFactory.java
-public interface ChessPieceFactory {
-    ChessPiece createPiece();
-}
-
-// PawnFactory.java
-public class PawnFactory implements ChessPieceFactory {
+// BlackPieceFactory.java
+public class BlackPieceFactory implements PieceFactory {
     @Override
-    public ChessPiece createPiece() {
-        return new Pawn();
+    public ChessPiece createPiece(String type) {
+        switch (type) {
+            case "Pawn":
+                return new BlackPawn();
+            case "Rook":
+                return new BlackRook();
+            // Add cases for other piece types as needed
+            default:
+                throw new IllegalArgumentException("Invalid piece type: " + type);
+        }
     }
 }
 
-// RookFactory.java
-public class RookFactory implements ChessPieceFactory {
+// BlackPawn.java
+public class BlackPawn implements ChessPiece {
     @Override
-    public ChessPiece createPiece() {
-        return new Rook();
+    public void move() {
+        // Implementation for black pawn's movement
+    }
+}
+
+// BlackRook.java
+public class BlackRook implements ChessPiece {
+    @Override
+    public void move() {
+        // Implementation for black rook's movement
     }
 }
