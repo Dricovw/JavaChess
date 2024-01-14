@@ -1,5 +1,4 @@
 import pieces.ChessPiece;
-import pieces.Pawn;
 import pieces.PieceFactory;
 
 public class PieceMove {
@@ -24,18 +23,48 @@ public class PieceMove {
     }
 
     public static ChessPiece[][] makeMove(String move, ChessPiece[][] chessboard) {
-        String[] squares = move.split(" to ");
-        int pieceStartRow = ChessGame.positionToNumber(squares[0], "row");
-        int pieceStartColumn = ChessGame.positionToNumber(squares[0], "column");
-        int pieceEndRow = ChessGame.positionToNumber(squares[1], "row");
-        int pieceEndColumn = ChessGame.positionToNumber(squares[1], "column");
-
-        chessboard[pieceEndRow][pieceEndColumn] = symbolToPiece("" + ChessGame.positionToPiece(squares[0]));
-        chessboard[pieceStartRow][pieceStartColumn] = null;
-        return chessboard;
+        try {
+            Command moveCommand = new MakeMoveCommand(move, chessboard);
+            return ((MakeMoveCommand) moveCommand).execute();
+        } catch (IllegalArgumentException e) {
+            // Handle the exception (print, log, etc.)
+            ChessGame.error = e.getMessage();
+            return chessboard;  // or return null, depending on your design
+        }
     }
 
-    private static ChessPiece symbolToPiece(String position) {
+    public class StartGameCommand extends Command {
+        private ChessPiece[][] chessboard;
+
+        public StartGameCommand(ChessPiece[][] chessboard) {
+            this.chessboard = chessboard;
+        }
+
+        @Override
+        public ChessPiece[][] execute() {
+            // Logic to start the chess game, initialize the chessboard, etc.
+            // ...
+            return new ChessPiece[0][0];
+        }
+    }
+
+    public class EndGameCommand extends Command {
+        private ChessPiece[][] chessboard;
+
+        public EndGameCommand(ChessPiece[][] chessboard) {
+            this.chessboard = chessboard;
+        }
+
+        @Override
+        public ChessPiece[][] execute() {
+            // Logic to end the chess game, determine the winner, cleanup, etc.
+            // ...
+            return new ChessPiece[0][0];
+        }
+    }
+
+
+    static ChessPiece symbolToPiece(String position) {
         switch (position.charAt(0)) {
             case 'p':
                 return PieceFactory.createPawn('p');
@@ -66,7 +95,7 @@ public class PieceMove {
                 return null;
         }
     }
-    private static boolean pieceIsSameColour(String move) {
+    public static boolean pieceIsSameColour(String move) {
         String[] squares = move.split(" to ");
         if (ChessGame.positionToPiece(squares[1]) == 'E') {
             return false;

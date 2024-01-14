@@ -1,5 +1,5 @@
-import java.util.Objects;
 import java.util.Scanner;
+
 import pieces.ChessPiece;
 import pieces.PieceFactory;
 
@@ -57,7 +57,8 @@ public class ChessGame {
                 String move = scanner.nextLine();
 
                 if (PieceMove.isValidMove(move)) {
-                    chessboard = PieceMove.makeMove(move, chessboard);
+                    Command moveCommand = new MakeMoveCommand(move, chessboard);
+                    ChessPiece[][] updatedChessboard = PieceMove.makeMove(move, chessboard);
                     isWhiteTurn = !isWhiteTurn;  // works
                 } else {
                     error = "Invalid move. Try again.";
@@ -133,6 +134,7 @@ public class ChessGame {
         System.out.println(" +----------------");
         System.out.println("   a b c d e f g h");
         System.out.println(error);
+        error = "";
     }
 
 
