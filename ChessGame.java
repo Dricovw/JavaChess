@@ -1,124 +1,35 @@
 import java.util.Scanner;
-
 import pieces.ChessPiece;
-import pieces.PieceFactory;
 
 public class ChessGame {
+    private ChessGameFacade gameFacade;
     private static ChessPiece[][] chessboard;
-    private boolean isWhiteTurn;
 
-    public static String error;
-
-        public ChessGame() {
-            initializeChessboard();
-            isWhiteTurn = true;
-            error = "";
-        }
-
-
-    private void initializeChessboard() {
-            chessboard = new ChessPiece[8][8];;
-            chessboard[7][7] = PieceFactory.createRook('R');
-            chessboard[7][0] = PieceFactory.createRook('R');
-            chessboard[0][7] = PieceFactory.createRook('r');
-            chessboard[0][0] = PieceFactory.createRook('r');
-            chessboard[7][5] = PieceFactory.createBishop('B');
-            chessboard[7][2] = PieceFactory.createBishop('B');
-            chessboard[0][5] = PieceFactory.createBishop('b');
-            chessboard[0][2] = PieceFactory.createBishop('b');
-            chessboard[7][6] = PieceFactory.createKnight('N');
-            chessboard[7][1] = PieceFactory.createKnight('N');
-            chessboard[0][6] = PieceFactory.createKnight('n');
-            chessboard[0][1] = PieceFactory.createKnight('n');
-            chessboard[7][4] = PieceFactory.createQueen('Q');
-            chessboard[0][3] = PieceFactory.createQueen('q');
-            chessboard[7][3] = PieceFactory.createKing('K');
-            chessboard[0][4] = PieceFactory.createKing('k');
-            for (int i = 0; i < 8; i++) {
-                chessboard[1][i] = PieceFactory.createPawn('p');
-            }
-            for (int i = 0; i < 8; i++) {
-                chessboard[6][i] = PieceFactory.createPawn('P');
-            }
-
-        }
-
-        public void start() {
-            Scanner scanner = new Scanner(System.in);
-
-            while (true) {
-                displayChessboard();
-                System.out.println(isWhiteTurn ? "White's turn" : "Black's turn");
-//                System.out.print("testing numbers:" + numberToPosition(3, 3) + "  ");
-//                System.out.print(positionToNumber("a4", "row") + "  ");
-//                System.out.print(positionToNumber("a4", "column") + "  ");
-                System.out.println();
-                System.out.print("Enter your move (e.g., e2 to e4): ");
-                String move = scanner.nextLine();
-
-                if (PieceMove.isValidMove(move)) {
-                    Command moveCommand = new MakeMoveCommand(move, chessboard);
-                    ChessPiece[][] updatedChessboard = PieceMove.makeMove(move, chessboard);
-                    isWhiteTurn = !isWhiteTurn;  // works
-                } else {
-                    error = "Invalid move. Try again.";
-                }
-            }
-
-        }
-
-    public static int positionToNumber(String position, String rowOrcolumn) {
-        char file = position.charAt(0);
-        int rank = Character.getNumericValue(position.charAt(1));
-
-        if (file >= 'a' && file <= 'h' && rank >= 1 && rank <= 8) {
-        int col = file - 'a';
-        int row = rank - 1;
-        int[] number = {row, col};
-        if (rowOrcolumn.equals("row")) {
-            return number[0];
-        } else {
-           return number[1];
-        }
-        } else {
-            error = "invalid position";
-        }
-        return -1;
+    public ChessGame() {
+        initializeGame();
     }
 
-    public static String numberToPosition(int col, int row) {
-        char file = (char) ('a' + col);
-        int rank = row + 1;
-
-        if (row >= 0 && row <= 7 && col >= 0 && col <= 7) {
-            return String.valueOf(file) + rank;
-        } else {
-            throw new IllegalArgumentException("Invalid position: ");
-        }
+    private void initializeGame() {
+        this.gameFacade = new GameLogic();
+        this.chessboard = gameFacade.getChessboard();  // Initialize the chessboard
     }
 
+    public void start() {
+        Scanner scanner = new Scanner(System.in);
 
+        while (true) {
+            displayChessboard();
+            System.out.println(gameFacade.getCurrentTurn() + "'s turn");
+            System.out.println();
+            System.out.print("Enter your move (e.g., e2 to e4): ");
 
-    public static char positionToPiece(String position) {
-        int row = Integer.parseInt(position.substring(1, 2)) - 1;
-        int col = position.charAt(0) - 'a';
-
-        if (row >= 0 && row <= 7 && col >= 0 && col <= 7) {
-                if (chessboard[row][col] == null) {
-                    return 'E';
-                } else {
-
-                    return chessboard[row][col].getSymbol();
-                }
-            } else {
-                throw new IllegalArgumentException("Invalid position: " + position);
+            try {
+                gameFacade.makeMove(scanner.nextLine());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
             }
         }
-
-
-
-
-
+    }
 
     private void displayChessboard() {
         System.out.println("   a b c d e f g h");
@@ -133,9 +44,10 @@ public class ChessGame {
         }
         System.out.println(" +----------------");
         System.out.println("   a b c d e f g h");
-        System.out.println(error);
-        error = "";
     }
 
-
+    public static void main(String[] args) {
+        ChessGame chessGame = new ChessGame();
+        chessGame.start();
     }
+}
