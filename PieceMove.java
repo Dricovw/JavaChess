@@ -1,25 +1,20 @@
 import pieces.ChessPiece;
 import pieces.Pawn;
 import pieces.PieceFactory;
-import pieces.Pawn;
 
 public class PieceMove {
 
     public static boolean isValidMove(String move) {
         String[] squares = move.split(" to ");
-        Pawn pawn = new Pawn('p');
-            if (pawn.isValidMove(
-                    ChessGame.positionToNumber(squares[0], "row"),
-                    ChessGame.positionToNumber(squares[0], "column"),
-                    ChessGame.positionToNumber(squares[1], "row") ,
-                    ChessGame.positionToNumber(squares[1], "column")
-            )){
-//                if (!pieceIsSameColour(move)) {
-//                    return false;
-//                }
-                return move.matches("[A-Ha-h][1-8] to [A-Ha-h][1-8]");
-            }
-        throw new IllegalArgumentException("Invalid move: ");
+        ChessPiece piece = symbolToPiece("" + ChessGame.positionToPiece(squares[0]));
+        if (piece != null && piece.isValidMove(
+                ChessGame.positionToNumber(squares[0], "row"),
+                ChessGame.positionToNumber(squares[0], "column"),
+                ChessGame.positionToNumber(squares[1], "row"),
+                ChessGame.positionToNumber(squares[1], "column"))) {
+            return true;
+        }
+        throw new IllegalArgumentException("Invalid move:");
     }
 
     public static ChessPiece[][] makeMove(String move, ChessPiece[][] chessboard) {
@@ -29,66 +24,52 @@ public class PieceMove {
         int pieceEndRow = ChessGame.positionToNumber(squares[1], "row");
         int pieceEndColumn = ChessGame.positionToNumber(squares[1], "column");
 
-        chessboard[pieceEndRow][pieceEndColumn] = whatPieceMoves(squares[0]);
+        chessboard[pieceEndRow][pieceEndColumn] = symbolToPiece("" + ChessGame.positionToPiece(squares[0]));
         chessboard[pieceStartRow][pieceStartColumn] = null;
         return chessboard;
     }
 
-    private static ChessPiece whatPieceMoves(String position) {
-        char oldPiece = ChessGame.positionToPiece(position);
-        if (oldPiece == 'p') {
-            return PieceFactory.createPawn('p');
-        } else if (oldPiece == 'P') {
-            return PieceFactory.createPawn('P');
-        } else if (oldPiece == 'r') {
-            return PieceFactory.createRook('r');
-        } else if (oldPiece == 'R') {
-            return PieceFactory.createRook('R');
-        } else if (oldPiece == 'b') {
-            return PieceFactory.createBishop('b');
-        } else if (oldPiece == 'B') {
-            return PieceFactory.createBishop('B');
-        } else if (oldPiece == 'q') {
-            return PieceFactory.createQueen('q');
-        } else if (oldPiece == 'Q') {
-            return PieceFactory.createQueen('q');
-        } else if (oldPiece == 'n') {
-            return PieceFactory.createKnight('n');
-        } else if (oldPiece == 'N') {
-            return PieceFactory.createKnight('N');
-        } else if (oldPiece == 'k') {
-            return PieceFactory.createKing('k');
-        } else if (oldPiece == 'K') {
-            return PieceFactory.createKing('K');
-        } else {
-            System.out.println("Invalid move. Try again.");
+    private static ChessPiece symbolToPiece(String position) {
+        switch (position.charAt(0)) {
+            case 'p':
+                return PieceFactory.createPawn('p');
+            case 'P':
+                return PieceFactory.createPawn('P');
+            case 'r':
+                return PieceFactory.createRook('r');
+            case 'R':
+                return PieceFactory.createRook('R');
+            case 'b':
+                return PieceFactory.createBishop('b');
+            case 'B':
+                return PieceFactory.createBishop('B');
+            case 'q':
+                return PieceFactory.createQueen('q');
+            case 'Q':
+                return PieceFactory.createQueen('Q');
+            case 'n':
+                return PieceFactory.createKnight('n');
+            case 'N':
+                return PieceFactory.createKnight('N');
+            case 'k':
+                return PieceFactory.createKing('k');
+            case 'K':
+                return PieceFactory.createKing('K');
+            default:
+                System.out.println("Invalid move. Try again.");
+                return null;
         }
-        return PieceFactory.createPawn('e');
     }
 
     private static boolean piecesExist(String move) {
         String[] squares = move.split(" to ");
-        String startpiece = "" + ChessGame.positionToPiece(squares[0]);
-        String endpiece = String.valueOf(ChessGame.positionToPiece(squares[1]));
-        if (startpiece == null) {
-            return false;
-        }
-        if (endpiece == null) {
-            return false;
-        }
-        return true;
+        String startPiece = "" + ChessGame.positionToPiece(squares[0]);
+        String endPiece = "" + ChessGame.positionToPiece(squares[1]);
+        return startPiece != null && endPiece != null;
     }
-
 
     private static boolean pieceIsSameColour(String move) {
         String[] squares = move.split(" to ");
-        if (!Character.isUpperCase(ChessGame.positionToPiece(squares[0])) == Character.isUpperCase(ChessGame.positionToPiece(squares[1]))) {
-            return false;
-        }
-        return false;
+        return Character.isUpperCase(ChessGame.positionToPiece(squares[0])) == Character.isUpperCase(ChessGame.positionToPiece(squares[1]));
     }
-
-
 }
-
-
