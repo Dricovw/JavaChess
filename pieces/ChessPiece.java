@@ -1,6 +1,7 @@
 // ChessPiece.java
 package pieces;
 
+
 public class ChessPiece implements Piece {
     private char symbol;
 
@@ -17,6 +18,9 @@ public class ChessPiece implements Piece {
 
     @Override
     public char getSymbol() {
+        if (symbol == ' ') {
+            throw new IllegalArgumentException("There are no pieces in this position.");
+        }
         return symbol;
     }
 }
