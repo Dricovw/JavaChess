@@ -14,11 +14,13 @@ public class PieceMove {
                 ChessGame.positionToNumber(squares[1], "column"))) {
 
        if (pieceIsSameColour(move)) {
-           throw new IllegalArgumentException("same colour");
+           ChessGame.error = "same colour";
+       } else {
+           return true;
        }
-            return true;
         }
-        throw new IllegalArgumentException("Invalid move:");
+       ChessGame.error = "invalid move";
+        return false;
     }
 
     public static ChessPiece[][] makeMove(String move, ChessPiece[][] chessboard) {
@@ -66,6 +68,9 @@ public class PieceMove {
     }
     private static boolean pieceIsSameColour(String move) {
         String[] squares = move.split(" to ");
+        if (ChessGame.positionToPiece(squares[1]) == 'E') {
+            return false;
+        } else {
         return Character.isUpperCase(ChessGame.positionToPiece(squares[0])) == Character.isUpperCase(ChessGame.positionToPiece(squares[1])) || Character.isLowerCase(ChessGame.positionToPiece(squares[0])) == Character.isLowerCase(ChessGame.positionToPiece(squares[1])) ;
-    }
+    }}
 }

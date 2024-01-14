@@ -99,15 +99,23 @@ public class ChessGame {
 
 
     public static char positionToPiece(String position) {
-        int row = Integer.parseInt(position.substring(1, 2)) - 1 ;
+        int row = Integer.parseInt(position.substring(1, 2)) - 1;
         int col = position.charAt(0) - 'a';
 
         if (row >= 0 && row <= 7 && col >= 0 && col <= 7) {
-         return chessboard[row][col].getSymbol();
-        } else {
-            throw new IllegalArgumentException("Invalid position: " + position);
+                if (chessboard[row][col] == null) {
+                    return 'E';
+                } else {
+
+                    return chessboard[row][col].getSymbol();
+                }
+            } else {
+                throw new IllegalArgumentException("Invalid position: " + position);
+            }
         }
-    }
+
+
+
 
 
 

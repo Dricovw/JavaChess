@@ -18,9 +18,6 @@ public class ChessPiece implements Piece {
 
     @Override
     public char getSymbol() {
-        if (symbol == ' ') {
-            throw new IllegalArgumentException("There are no pieces in this position.");
-        }
         return symbol;
     }
 }
