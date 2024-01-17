@@ -23,26 +23,25 @@ public class PieceMove {
         chessGame.setError("invalid move");
         return false;
     }
-    public static ChessPiece[][] makeMove(String move, ChessPiece[][] chessboard) {
-        try {
-            Command moveCommand = new MakeMoveCommand(move, chessboard);
-            return ((MakeMoveCommand) moveCommand).execute();
-        } catch (IllegalArgumentException e) {
-            // Handle the exception (print, log, etc.)
-            ChessGame.error = e.getMessage();
-            return chessboard;  // or return null, depending on your design
-        }
-        // Stashed changes
-//    public static ChessPiece[][] makeMove(String move, ChessGameFacade chessGame) {
-//        String[] squares = move.split(" to ");
-//        int pieceStartRow = chessGame.positionToNumber(squares[0], "row");
-//        int pieceStartColumn = chessGame.positionToNumber(squares[0], "column");
-//        int pieceEndRow = chessGame.positionToNumber(squares[1], "row");
-//        int pieceEndColumn = chessGame.positionToNumber(squares[1], "column");
-//
-//        chessGame.setChessboardValue(pieceEndRow, pieceEndColumn, symbolToPiece("" + chessGame.positionToPiece(squares[0])));
-//        chessGame.setChessboardValue(pieceStartRow, pieceStartColumn, null);
-//        return chessGame.getChessboard();
+//    public static ChessPiece[][] makeMove(String move, ChessPiece[][] chessboard) {
+//        try {
+//            Command moveCommand = new MakeMoveCommand(move, chessboard);
+//            return ((MakeMoveCommand) moveCommand).execute();
+//        } catch (IllegalArgumentException e) {
+//            // Handle the exception (print, log, etc.)
+//            ChessGame.error = e.getMessage();
+//            return chessboard;  // or return null, depending on your design
+//        }
+    public static ChessPiece[][] makeMove(String move, ChessGameFacade chessGame) {
+        String[] squares = move.split(" to ");
+        int pieceStartRow = chessGame.positionToNumber(squares[0], "row");
+        int pieceStartColumn = chessGame.positionToNumber(squares[0], "column");
+        int pieceEndRow = chessGame.positionToNumber(squares[1], "row");
+        int pieceEndColumn = chessGame.positionToNumber(squares[1], "column");
+
+        chessGame.setChessboardValue(pieceEndRow, pieceEndColumn, symbolToPiece("" + chessGame.positionToPiece(squares[0])));
+        chessGame.setChessboardValue(pieceStartRow, pieceStartColumn, null);
+        return chessGame.getChessboard();
     }
 
     public class StartGameCommand extends Command {
