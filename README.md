@@ -8,6 +8,9 @@ We have seperatly thought of solutions and projects we can do, this was before w
 After a day we came together to discuss and compare our finding and find a good solution, which was a chess game.
 then we used the idea that we had and searched for more on the internet and
 
+## Class Diagram overview of the project.
+![Class Diagram](JavaChess.drawio.png)
+
 ## The Factory Design Pattern
 In our chess game Tim worked on implementing this design pattern through the 'Piece Factory' class. This class builds the pieces from the Piece classes and creates different chess pieces.
 Every method is responsible for creating an instance of a specific chess piece. Each method needs a symbol parameter to initialize the chess piece with the appropriate symbol. For example
