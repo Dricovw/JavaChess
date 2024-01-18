@@ -23,3 +23,8 @@ Tim continued to work on writing the logic of the chess pieces and used a Strate
 as the strategy interface, and concrete chess pieces classes (e.g., 'Pawn Rook','Rook', etc.) implementing this interface with their specific behaviours. The Piece interface defines two methods, isValidMove and getSymbol represent the common behaviors expected from all chess pieces.
 
 The ChessPiece class is a common class and serves as a context for all chess pieces.
+
+## Facade Structure Pattern
+the Facade pattern is implemented in a file "ChessGameFacade" which is an interface and is used in the GameLogic class. Game logic as the class states is a JavaScript that has all the Game logic of the Chess game written.
+Chessgame is the class that iniates most of the game but the logic is stored in the gamelogic class thus. Chessgame interacts a lot of with the Gamelogic that inherits it from the "ChessGameFacade" interface where high level
+methods are stored.
