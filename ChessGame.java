@@ -1,24 +1,29 @@
-import java.util.Scanner;
 import pieces.ChessPiece;
+
+import java.util.Scanner;
 
 public class ChessGame {
     private ChessGameFacade gameFacade;
-    private static ChessPiece[][] chessboard;
+
+    private ChessboardManager chessboardManager;
+    private static ChessComponent[][] chessboard;
 
     public ChessGame() {
         initializeGame();
+        ChessboardManager.startGame();
+        this.chessboardManager = ChessboardManager.getInstance();
     }
 
     private void initializeGame() {
         this.gameFacade = new GameLogic();
-        this.chessboard = gameFacade.getChessboard();  // Initialize the chessboard
+        this.chessboard = gameFacade.getChessboard();
     }
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            displayChessboard();
+            displayChessboard();  // Use display method
             System.out.println(gameFacade.getCurrentTurn() + "'s turn");
             System.out.println();
             System.out.print("Enter your move (e.g., e2 to e4): ");
@@ -37,14 +42,20 @@ public class ChessGame {
         for (int i = 0; i < 8; i++) {
             System.out.print(i + 1 + "| ");
             for (int j = 0; j < 8; j++) {
-                ChessPiece piece = chessboard[i][j];
-                System.out.print(piece != null ? piece.getSymbol() + " " : "  ");  // Check for null
+                ChessComponent square = chessboard[i][j];
+                if (square != null) {
+                    square.display();  // Assuming ChessComponent has a display method
+                } else {
+                    System.out.print("  ");  // Placeholder for empty square
+                }
             }
             System.out.println("| " + (i + 1));
         }
         System.out.println(" +----------------");
         System.out.println("   a b c d e f g h");
     }
+
+
 
     public static void main(String[] args) {
         ChessGame chessGame = new ChessGame();

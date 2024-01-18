@@ -28,3 +28,20 @@ The ChessPiece class is a common class and serves as a context for all chess pie
 the Facade pattern is implemented in a file "ChessGameFacade" which is an interface and is used in the GameLogic class. Game logic as the class states is a JavaScript that has all the Game logic of the Chess game written.
 Chessgame is the class that iniates most of the game but the logic is stored in the gamelogic class thus. Chessgame interacts a lot of with the Gamelogic that inherits it from the "ChessGameFacade" interface where high level
 methods are stored.
+
+## Singleton Design Pattern
+On the other hand, Drico was working on a Singleton Design Pattern. He has made the ChessboardManager, which is designed to manage the chessboard by a singleton pattern. It is a singleton pattern because it has only one intance of itself in the application.
+It provides access to a method that lets you retrieve a ChessComponent from the chessboard based on the row and columns.
+
+
+## Command Design Pattern
+The next thing he worked on was the Command design Pattern, its use is to make operation available to be called as objects. These operations are defined in the command interface.
+The three commands so far, start, end and MakeMove provide enough veriation and can be called
+
+
+Start, End and Make move are all operation that can be called as objects
+command interface, defining interface for the operations
+the three command classes provide variations as needed and are specific
+
+## Composistion Design pattern
+

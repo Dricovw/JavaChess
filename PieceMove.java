@@ -5,7 +5,8 @@ public class PieceMove {
 
     public static boolean isValidMove(String move, ChessGameFacade chessGame) {
         String[] squares = move.split(" to ");
-        ChessPiece piece = symbolToPiece("" + chessGame.positionToPiece(squares[0]));
+
+        ChessPiece piece = symbolToPiece("" + GameLogic.positionToPiece(squares[0]));
 
         if (piece != null && piece.isValidMove(
                 chessGame.positionToNumber(squares[0], "row"),
@@ -23,23 +24,16 @@ public class PieceMove {
         chessGame.setError("invalid move");
         return false;
     }
-//    public static ChessPiece[][] makeMove(String move, ChessPiece[][] chessboard) {
-//        try {
-//            Command moveCommand = new MakeMoveCommand(move, chessboard);
-//            return ((MakeMoveCommand) moveCommand).execute();
-//        } catch (IllegalArgumentException e) {
-//            // Handle the exception (print, log, etc.)
-//            ChessGame.error = e.getMessage();
-//            return chessboard;  // or return null, depending on your design
-//        }
-    public static ChessPiece[][] makeMove(String move, ChessGameFacade chessGame) {
+
+
+    public static ChessComponent[][] makeMove(String move, ChessGameFacade chessGame) {
         String[] squares = move.split(" to ");
         int pieceStartRow = chessGame.positionToNumber(squares[0], "row");
         int pieceStartColumn = chessGame.positionToNumber(squares[0], "column");
         int pieceEndRow = chessGame.positionToNumber(squares[1], "row");
         int pieceEndColumn = chessGame.positionToNumber(squares[1], "column");
 
-        chessGame.setChessboardValue(pieceEndRow, pieceEndColumn, symbolToPiece("" + chessGame.positionToPiece(squares[0])));
+        chessGame.setChessboardValue(pieceEndRow, pieceEndColumn, symbolToPiece("" + GameLogic.positionToPiece(squares[0])));
         chessGame.setChessboardValue(pieceStartRow, pieceStartColumn, null);
         return chessGame.getChessboard();
     }
@@ -73,6 +67,9 @@ public class PieceMove {
             return new ChessPiece[0][0];
         }
     }
+
+
+
 
 
     static ChessPiece symbolToPiece(String position) {
@@ -109,11 +106,11 @@ public class PieceMove {
 
     private static boolean pieceIsSameColour(String move, ChessGameFacade chessGame) {
         String[] squares = move.split(" to ");
-        if (chessGame.positionToPiece(squares[1]) == 'E') {
+        if (GameLogic.positionToPiece(squares[1]) == 'E') {
             return false;
         } else {
-            return Character.isUpperCase(chessGame.positionToPiece(squares[0])) == Character.isUpperCase(chessGame.positionToPiece(squares[1])) ||
-                    Character.isLowerCase(chessGame.positionToPiece(squares[0])) == Character.isLowerCase(chessGame.positionToPiece(squares[1]));
+            return Character.isUpperCase(GameLogic.positionToPiece(squares[0])) == Character.isUpperCase(GameLogic.positionToPiece(squares[1])) ||
+                    Character.isLowerCase(GameLogic.positionToPiece(squares[0])) == Character.isLowerCase(GameLogic.positionToPiece(squares[1]));
         }
     }
 }

@@ -2,43 +2,52 @@ import pieces.ChessPiece;
 import pieces.PieceFactory;
 
 public class GameLogic implements ChessGameFacade {
-    private ChessPiece[][] chessboard;
+
+    private static ChessComponent[][] chessboard;
     private boolean isWhiteTurn;
+    private ChessboardManager chessboardManager;
 
     public GameLogic() {
         initializeChessboard();
+        this.chessboardManager = ChessboardManager.getInstance();
         isWhiteTurn = true;
     }
 
-    public ChessPiece[][] getChessboard() {
-        return chessboard;
-    }
 
 
     private void initializeChessboard() {
-        chessboard = new ChessPiece[8][8];;
-        chessboard[7][7] = PieceFactory.createRook('R');
-        chessboard[7][0] = PieceFactory.createRook('R');
-        chessboard[0][7] = PieceFactory.createRook('r');
-        chessboard[0][0] = PieceFactory.createRook('r');
-        chessboard[7][5] = PieceFactory.createBishop('B');
-        chessboard[7][2] = PieceFactory.createBishop('B');
-        chessboard[0][5] = PieceFactory.createBishop('b');
-        chessboard[0][2] = PieceFactory.createBishop('b');
-        chessboard[7][6] = PieceFactory.createKnight('N');
-        chessboard[7][1] = PieceFactory.createKnight('N');
-        chessboard[0][6] = PieceFactory.createKnight('n');
-        chessboard[0][1] = PieceFactory.createKnight('n');
-        chessboard[7][4] = PieceFactory.createQueen('Q');
-        chessboard[0][3] = PieceFactory.createQueen('q');
-        chessboard[7][3] = PieceFactory.createKing('K');
-        chessboard[0][4] = PieceFactory.createKing('k');
+        chessboard = new ChessComponent[8][8];
+
+        chessboard[7][7] = new ChessPieceLeaf(PieceFactory.createRook('R'));
+        chessboard[7][0] = new ChessPieceLeaf(PieceFactory.createRook('R'));
+        chessboard[0][7] = new ChessPieceLeaf(PieceFactory.createRook('r'));
+        chessboard[0][0] = new ChessPieceLeaf(PieceFactory.createRook('r'));
+        chessboard[7][5] = new ChessPieceLeaf(PieceFactory.createBishop('B'));
+        chessboard[7][2] = new ChessPieceLeaf(PieceFactory.createBishop('B'));
+        chessboard[0][5] = new ChessPieceLeaf(PieceFactory.createBishop('b'));
+        chessboard[0][2] = new ChessPieceLeaf(PieceFactory.createBishop('b'));
+        chessboard[7][6] = new ChessPieceLeaf(PieceFactory.createKnight('N'));
+        chessboard[7][1] = new ChessPieceLeaf(PieceFactory.createKnight('N'));
+        chessboard[0][6] = new ChessPieceLeaf(PieceFactory.createKnight('n'));
+        chessboard[0][1] = new ChessPieceLeaf(PieceFactory.createKnight('n'));
+        chessboard[7][4] = new ChessPieceLeaf(PieceFactory.createQueen('Q'));
+        chessboard[0][3] = new ChessPieceLeaf(PieceFactory.createQueen('q'));
+        chessboard[7][3] = new ChessPieceLeaf(PieceFactory.createKing('K'));
+        chessboard[0][4] = new ChessPieceLeaf(PieceFactory.createKing('k'));
+
         for (int i = 0; i < 8; i++) {
-            chessboard[1][i] = PieceFactory.createPawn('p');
+            chessboard[1][i] = new ChessPieceLeaf(PieceFactory.createPawn('p'));
         }
+
         for (int i = 0; i < 8; i++) {
-            chessboard[6][i] = PieceFactory.createPawn('P');
+            chessboard[6][i] = new ChessPieceLeaf(PieceFactory.createPawn('P'));
         }
+    }
+
+
+
+    public ChessComponent[][] getChessboard() {
+        return chessboard;
     }
 
     @Override
@@ -50,8 +59,10 @@ public class GameLogic implements ChessGameFacade {
         int endY = positionToNumber(squares[1], "column");
 
         if (PieceMove.isValidMove(move, this)) {
-            PieceMove.makeMove(move, this);
-            isWhiteTurn = !isWhiteTurn;
+            if (movingCorrectColour(move, isWhiteTurn)) {
+                PieceMove.makeMove(move, this);
+                isWhiteTurn = !isWhiteTurn;
+            }
         } else {
             setError("Invalid move. Try again.");
             throw new IllegalArgumentException("Invalid move: " + move);
@@ -65,11 +76,22 @@ public class GameLogic implements ChessGameFacade {
 
     @Override
     public void setChessboardValue(int row, int column, ChessPiece value) {
-        chessboard[row][column] = value;
+        chessboard[row][column] = new ChessPieceLeaf(value);
     }
 
 
-    public char positionToPiece(String position) {
+    public static boolean movingCorrectColour(String move, Boolean WhiteTurn) {
+        String[] squares = move.split("to");
+        if (Character.isUpperCase(GameLogic.positionToPiece(squares[0])) && !WhiteTurn) {
+            return true;
+        } else if (Character.isUpperCase(GameLogic.positionToPiece(squares[0])) && !WhiteTurn) {
+            return true;
+        }
+        else  throw new IllegalArgumentException("not your color: ");
+    }
+
+
+    public static char positionToPiece(String position) {
         int row = Integer.parseInt(position.substring(1, 2)) - 1;
         int col = position.charAt(0) - 'a';
 
