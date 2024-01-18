@@ -32,16 +32,15 @@ methods are stored.
 ## Singleton Design Pattern
 On the other hand, Drico was working on a Singleton Design Pattern. He has made the ChessboardManager, which is designed to manage the chessboard by a singleton pattern. It is a singleton pattern because it has only one intance of itself in the application.
 It provides access to a method that lets you retrieve a ChessComponent from the chessboard based on the row and columns.
-
+The addition to the application is wanted because it give the application global access to certain function and although it isnt used often. The scaleability of it shoulnt be underestimated. its use is now that it simplifies the control of the management and manipulation of the chessboard within the Chess Game. Any part of the system can obtain the reference to the same ChessboardManager instance, promoting consistency and avoiding unnecessary duplication.
 
 ## Command Design Pattern
 The next thing he worked on was the Command design Pattern, its use is to make operation available to be called as objects. These operations are defined in the command interface.
-The three commands so far, start, end and MakeMove provide enough veriation and can be called
+The three commands so far, start, end and MakeMove provide accesible and repeatable operation for the applicaton.
+Some benefits are add flexibility and Decoupling, where the concerns between the sender and reciever are seperated. In this instance of use it sets it up to execute various commands. When a player makes a move, the Chess Game creates a corresponding MoveCommand and associates it with the invoker. The invoker then triggers the execution of the command, resulting in the desired action (e.g., updating the game board).
 
-
-Start, End and Make move are all operation that can be called as objects
-command interface, defining interface for the operations
-the three command classes provide variations as needed and are specific
 
 ## Composistion Design pattern
+In this application, the composition design pattern is also used. It has the fucntion of representing complex stuctures as simpler objects.  This pattern allows individual objects (components) to be combined into larger structures (composites), forming a tree-like hierarchy. In the context of the Chess Game, composition is applied to represent the chessboard, pieces, and their relationships.
+It has the benefits of adding more flexibility and scalability, since the components can easily be added or removed without affecting the structure. In this usage it achieves a modular and flexible structure. The chessboard can be easily expanded or modified by adding new types of squares or pieces. The hierarchical composition allows for a clear representation of the game elements without making the system overly complex.
 
