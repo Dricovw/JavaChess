@@ -22,11 +22,9 @@ The Piece interface defines two methods, isValidMove and getSymbol, representing
 
 The ChessPiece class is a common class and serves as a context for all chess pieces.
 
-## Facade Structure Pattern
-The Facade pattern is implemented in a file "ChessGameFacade," which is an interface and is used in the GameLogic class.
-Game logic, as the class states, is a JavaScript that has all the Game logic of the Chess game written.
-Chessgame initiates most of the game, but the logic is stored in the gamelogic class.
-Chessgame interacts a lot with the Gamelogic that inherits it from the "ChessGameFacade" interface where high-level methods are stored.
+## Facade Design Pattern
+Tim began simplifying game interactions by consolidating subsystems and logic under a Facade. Players interacting with the facade delegate requests to underlying subsystem classes, reducing complexity.
+The Facade pattern is implemented in a file called "ChessGameFacade," serving as an interface and used in the GameLogic class. The GameLogic class, written in JavaScript, contains all chess game logic. ChessGame initiates most of the game, with logic stored in the GameLogic class. ChessGame frequently interacts with GameLogic, inheriting from the "ChessGameFacade" interface where high-level methods are stored.
 
 ## Singleton Design Pattern
 On the other hand, Drico was working on a Singleton Design Pattern.
