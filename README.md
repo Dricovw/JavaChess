@@ -3,6 +3,12 @@
 
 In this project, Tim and I have separately thought of solutions and projects we can do. This was before we decided on the chess game. After a day, we came together to discuss and compare our findings and find a good solution, which was a chess game. Then we used the ideas that we had and searched for more on the internet.
 
+Participants:
+- Drico
+- Tim
+
+repo link: https://github.com/Dricovw/JavaChess
+
 ## Class Diagram overview of the project.
 ![Class Diagram](JavaChess.drawio.png)
 
