@@ -82,7 +82,8 @@ public class GameLogic implements ChessGameFacade {
 
     public static boolean movingCorrectColour(String move, Boolean WhiteTurn) {
         String[] squares = move.split("to");
-        if (Character.isUpperCase(GameLogic.positionToPiece(squares[0])) && !WhiteTurn) {
+        System.out.println(GameLogic.positionToPiece(squares[0]));
+        if (Character.isLowerCase(GameLogic.positionToPiece(squares[0])) && WhiteTurn) {
             return true;
         } else if (Character.isUpperCase(GameLogic.positionToPiece(squares[0])) && !WhiteTurn) {
             return true;
