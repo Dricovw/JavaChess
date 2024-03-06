@@ -38,40 +38,6 @@ public class PieceMove {
         return chessGame.getChessboard();
     }
 
-    public class StartGameCommand extends Command {
-        private ChessPiece[][] chessboard;
-
-        public StartGameCommand(ChessPiece[][] chessboard) {
-            this.chessboard = chessboard;
-        }
-
-        @Override
-        public ChessPiece[][] execute() {
-            // Logic to start the chess game, initialize the chessboard, etc.
-            // ...
-            return new ChessPiece[0][0];
-        }
-    }
-
-    public class EndGameCommand extends Command {
-        private ChessPiece[][] chessboard;
-
-        public EndGameCommand(ChessPiece[][] chessboard) {
-            this.chessboard = chessboard;
-        }
-
-        @Override
-        public ChessPiece[][] execute() {
-            // Logic to end the chess game, determine the winner, cleanup, etc.
-            // ...
-            return new ChessPiece[0][0];
-        }
-    }
-
-
-
-
-
     static ChessPiece symbolToPiece(String position) {
         switch (position.charAt(0)) {
             case 'p':

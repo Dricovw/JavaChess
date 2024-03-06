@@ -1,16 +1,16 @@
-import pieces.ChessPiece;
-
 public class EndGameCommand extends Command {
-    private ChessPiece[][] chessboard;
+    private String winner;
 
-    public EndGameCommand(ChessPiece[][] chessboard) {
-        this.chessboard = chessboard;
+    public EndGameCommand(String winner) {
+        this.winner = winner;
     }
 
     @Override
-    public ChessPiece[][] execute() {
-        // Logic to end the chess game, determine the winner, cleanup, etc.
-        // ...
-        return new ChessPiece[0][];
+    public String execute() {
+        // Print the end game message with the provided winner
+        System.out.println("Game finished! Winner: " + winner);
+
+        // Return a message indicating the game is finished and who won
+        return null;
     }
 }

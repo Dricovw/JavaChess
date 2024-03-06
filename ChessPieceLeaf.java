@@ -14,6 +14,11 @@ public class ChessPieceLeaf implements ChessComponent {
 
     @Override
     public char getSymbol() {
-        return piece != null ? piece.getSymbol() : ' ';
+        if (piece == null) {
+            return ' ';
+        } else {
+            return piece.getSymbol();
+        }
+//        return piece != null ? piece.getSymbol() : ' ';
     }
 }

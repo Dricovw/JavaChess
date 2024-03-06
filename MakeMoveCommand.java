@@ -10,8 +10,8 @@ public class MakeMoveCommand extends Command {
     }
 
     @Override
-    protected ChessPiece[][] execute() {
-        return new ChessPiece[0][];
+    protected String execute() {
+        return "command";
     }
 
 //    @Override

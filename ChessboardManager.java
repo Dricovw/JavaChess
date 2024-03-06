@@ -28,10 +28,4 @@ public class ChessboardManager {
         }
     }
 
-    // Other methods and properties...
-
-    // Example method
-    public static void startGame() {
-        System.out.println("Chess game started!");
-    }
 }

@@ -1,28 +1,33 @@
-import pieces.ChessPiece;
+import pieces.King;
 
 import java.util.Scanner;
 
 public class ChessGame {
     private ChessGameFacade gameFacade;
 
+    private int i;
+
     private ChessboardManager chessboardManager;
     private static ChessComponent[][] chessboard;
 
     public ChessGame() {
+        i = 0;
         initializeGame();
-        ChessboardManager.startGame();
+        StartGameCommand startGameCommand = new StartGameCommand();
+        startGameCommand.execute();
         this.chessboardManager = ChessboardManager.getInstance();
     }
 
     private void initializeGame() {
         this.gameFacade = new GameLogic();
         this.chessboard = gameFacade.getChessboard();
+
     }
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+        while (IsGameOver(chessboard)) {
             displayChessboard();  // Use display method
             System.out.println(gameFacade.getCurrentTurn() + "'s turn");
             System.out.println();
@@ -53,12 +58,36 @@ public class ChessGame {
         }
         System.out.println(" +----------------");
         System.out.println("   a b c d e f g h");
+
     }
 
+    public boolean IsGameOver(ChessComponent[][] chessboard) {
+        boolean whiteKingFound = false;
+        boolean blackKingFound = false;
+
+        // Iterate through the chessboard
+        for (ChessComponent[] row : chessboard) {
+            for (ChessComponent piece : row) {
+                System.out.println(piece.getSymbol());
+                if (piece instanceof King) {
+                    System.out.println(count());
+                    // Found a King piece
+                    King king = (King) piece;
+                    System.out.println(king.getSymbol());
 
 
-    public static void main(String[] args) {
-        ChessGame chessGame = new ChessGame();
-        chessGame.start();
+                }
+            }
+        }
+
+        // If either white or black king is missing, return true
+        return !whiteKingFound || !blackKingFound;
     }
+
+    public int count() {
+        return i += 1;
+    }
+
 }
+
+
