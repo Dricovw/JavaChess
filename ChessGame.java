@@ -5,13 +5,12 @@ import java.util.Scanner;
 public class ChessGame {
     private ChessGameFacade gameFacade;
 
-    private int i;
+    private String winner;
 
     private ChessboardManager chessboardManager;
     private static ChessComponent[][] chessboard;
 
     public ChessGame() {
-        i = 0;
         initializeGame();
         StartGameCommand startGameCommand = new StartGameCommand();
         startGameCommand.execute();
@@ -27,7 +26,13 @@ public class ChessGame {
     public void start() {
         Scanner scanner = new Scanner(System.in);
 
-        while (IsGameOver(chessboard)) {
+        while (true) {
+            if (!IsGameOver(chessboard)) {
+                EndGameCommand endGameCommand = new EndGameCommand(winner);
+                endGameCommand.execute();
+                break;
+            }
+
             displayChessboard();  // Use display method
             System.out.println(gameFacade.getCurrentTurn() + "'s turn");
             System.out.println();
@@ -65,29 +70,28 @@ public class ChessGame {
         boolean whiteKingFound = false;
         boolean blackKingFound = false;
 
-        // Iterate through the chessboard
+
         for (ChessComponent[] row : chessboard) {
             for (ChessComponent piece : row) {
-                System.out.println(piece.getSymbol());
-                if (piece instanceof King) {
-                    System.out.println(count());
-                    // Found a King piece
-                    King king = (King) piece;
-                    System.out.println(king.getSymbol());
-
+                if (piece != null) {
+                    if (piece.getSymbol() == 'k') {
+                        whiteKingFound = true;
+                    } else if (piece.getSymbol() == 'K') {
+                        blackKingFound = true;
+                    }
 
                 }
             }
         }
 
-        // If either white or black king is missing, return true
-        return !whiteKingFound || !blackKingFound;
-    }
+            if (whiteKingFound != true) {
+                winner = "black";
+            } else if (blackKingFound != true) {
+                winner = "white";
+            }
+            return whiteKingFound && blackKingFound;
+        }
 
-    public int count() {
-        return i += 1;
     }
-
-}
 
 

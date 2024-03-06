@@ -14,6 +14,11 @@ public class MakeMoveCommand extends Command {
         return "command";
     }
 
+    @Override
+    public String execute(boolean winner) {
+        return null;
+    }
+
 //    @Override
 //    public ChessPiece[][] execute() {
 //        // Your logic here

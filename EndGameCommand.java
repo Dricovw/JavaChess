@@ -5,12 +5,15 @@ public class EndGameCommand extends Command {
         this.winner = winner;
     }
 
-    @Override
-    public String execute() {
-        // Print the end game message with the provided winner
-        System.out.println("Game finished! Winner: " + winner);
 
-        // Return a message indicating the game is finished and who won
+    @Override
+    protected String execute() {
+        System.out.println(winner + " has won!");
+        return null;
+    }
+
+    @Override
+    public String execute(boolean winner) {
         return null;
     }
 }
