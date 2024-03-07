@@ -45,11 +45,11 @@ Any part of the system can obtain the reference to the same ChessboardManager in
 ## Command Design Pattern
 The next thing he worked on was the Command design Pattern, its use is to make operations available to be called as objects.
 These operations are defined in the command interface.
-The three commands so far, start, end, and MakeMove provide accessible and repeatable operations for the application. 
+There are two commands: start and end. The Start command announces that the game has started and the End command announces the winner if the king is taken from either side.
 Some benefits are added flexibility and Decoupling, where the concerns between the sender and receiver are separated.
 In this instance of use, it sets it up to execute various commands.
-When a player makes a move, the Chess Game creates a corresponding MoveCommand and associates it with the invoker.
-The invoker then triggers the execution of the command, resulting in the desired action (e.g., updating the game board).
+When a player makes a move, it checks if one of the kings is no longer on the board and if that is the case, it stops the game and check which one.
+Then the winner will be declared.
 
 ## Composite Design pattern
 In this application, the composition design pattern is also used. 
