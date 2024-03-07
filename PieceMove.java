@@ -1,5 +1,7 @@
+import pieces.BlackPieceFactory;
 import pieces.ChessPiece;
 import pieces.PieceFactory;
+import pieces.WhitePieceFactory;
 
 public class PieceMove {
 
@@ -39,31 +41,33 @@ public class PieceMove {
     }
 
     static ChessPiece symbolToPiece(String position) {
-        switch (position.charAt(0)) {
+        char symbol = position.charAt(0);
+
+        switch (symbol) {
             case 'p':
-                return PieceFactory.createPawn('p');
-            case 'P':
-                return PieceFactory.createPawn('P');
+                return WhitePieceFactory.createPawn(symbol);
             case 'r':
-                return PieceFactory.createRook('r');
-            case 'R':
-                return PieceFactory.createRook('R');
-            case 'b':
-                return PieceFactory.createBishop('b');
-            case 'B':
-                return PieceFactory.createBishop('B');
-            case 'q':
-                return PieceFactory.createQueen('q');
-            case 'Q':
-                return PieceFactory.createQueen('Q');
+                return WhitePieceFactory.createRook(symbol);
             case 'n':
-                return PieceFactory.createKnight('n');
-            case 'N':
-                return PieceFactory.createKnight('N');
+                return WhitePieceFactory.createKnight(symbol);
+            case 'b':
+                return WhitePieceFactory.createBishop(symbol);
+            case 'q':
+                return WhitePieceFactory.createQueen(symbol);
             case 'k':
-                return PieceFactory.createKing('k');
+                return WhitePieceFactory.createKing(symbol);
+            case 'P':
+                return BlackPieceFactory.createPawn(symbol);
+            case 'R':
+                return BlackPieceFactory.createRook(symbol);
+            case 'N':
+                return BlackPieceFactory.createKnight(symbol);
+            case 'B':
+                return BlackPieceFactory.createBishop(symbol);
+            case 'Q':
+                return BlackPieceFactory.createQueen(symbol);
             case 'K':
-                return PieceFactory.createKing('K');
+                return BlackPieceFactory.createKing(symbol);
             default:
                 System.out.println("Invalid move. Try again.");
                 return null;

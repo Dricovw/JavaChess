@@ -1,5 +1,6 @@
+import pieces.BlackPieceFactory;
 import pieces.ChessPiece;
-import pieces.PieceFactory;
+import pieces.WhitePieceFactory;
 
 public class GameLogic implements ChessGameFacade {
 
@@ -18,29 +19,29 @@ public class GameLogic implements ChessGameFacade {
     private void initializeChessboard() {
         chessboard = new ChessComponent[8][8];
 
-        chessboard[7][7] = new ChessPieceLeaf(PieceFactory.createRook('R'));
-        chessboard[7][0] = new ChessPieceLeaf(PieceFactory.createRook('R'));
-        chessboard[0][7] = new ChessPieceLeaf(PieceFactory.createRook('r'));
-        chessboard[0][0] = new ChessPieceLeaf(PieceFactory.createRook('r'));
-        chessboard[7][5] = new ChessPieceLeaf(PieceFactory.createBishop('B'));
-        chessboard[7][2] = new ChessPieceLeaf(PieceFactory.createBishop('B'));
-        chessboard[0][5] = new ChessPieceLeaf(PieceFactory.createBishop('b'));
-        chessboard[0][2] = new ChessPieceLeaf(PieceFactory.createBishop('b'));
-        chessboard[7][6] = new ChessPieceLeaf(PieceFactory.createKnight('N'));
-        chessboard[7][1] = new ChessPieceLeaf(PieceFactory.createKnight('N'));
-        chessboard[0][6] = new ChessPieceLeaf(PieceFactory.createKnight('n'));
-        chessboard[0][1] = new ChessPieceLeaf(PieceFactory.createKnight('n'));
-        chessboard[7][4] = new ChessPieceLeaf(PieceFactory.createQueen('Q'));
-        chessboard[0][3] = new ChessPieceLeaf(PieceFactory.createQueen('q'));
-        chessboard[7][3] = new ChessPieceLeaf(PieceFactory.createKing('K'));
-        chessboard[0][4] = new ChessPieceLeaf(PieceFactory.createKing('k'));
+        chessboard[7][7] = new ChessPieceLeaf(BlackPieceFactory.createRook('R'));
+        chessboard[7][0] = new ChessPieceLeaf(BlackPieceFactory.createRook('R'));
+        chessboard[0][7] = new ChessPieceLeaf(WhitePieceFactory.createRook('r'));
+        chessboard[0][0] = new ChessPieceLeaf(WhitePieceFactory.createRook('r'));
+        chessboard[7][5] = new ChessPieceLeaf(BlackPieceFactory.createBishop('B'));
+        chessboard[7][2] = new ChessPieceLeaf(BlackPieceFactory.createBishop('B'));
+        chessboard[0][5] = new ChessPieceLeaf(WhitePieceFactory.createBishop('b'));
+        chessboard[0][2] = new ChessPieceLeaf(WhitePieceFactory.createBishop('b'));
+        chessboard[7][6] = new ChessPieceLeaf(BlackPieceFactory.createKnight('N'));
+        chessboard[7][1] = new ChessPieceLeaf(BlackPieceFactory.createKnight('N'));
+        chessboard[0][6] = new ChessPieceLeaf(WhitePieceFactory.createKnight('n'));
+        chessboard[0][1] = new ChessPieceLeaf(WhitePieceFactory.createKnight('n'));
+        chessboard[7][4] = new ChessPieceLeaf(BlackPieceFactory.createQueen('Q'));
+        chessboard[0][3] = new ChessPieceLeaf(WhitePieceFactory.createQueen('q'));
+        chessboard[7][3] = new ChessPieceLeaf(BlackPieceFactory.createKing('K'));
+        chessboard[0][4] = new ChessPieceLeaf(WhitePieceFactory.createKing('k'));
 
         for (int i = 0; i < 8; i++) {
-            chessboard[1][i] = new ChessPieceLeaf(PieceFactory.createPawn('p'));
+            chessboard[1][i] = new ChessPieceLeaf(WhitePieceFactory.createPawn('p'));
         }
 
         for (int i = 0; i < 8; i++) {
-            chessboard[6][i] = new ChessPieceLeaf(PieceFactory.createPawn('P'));
+            chessboard[6][i] = new ChessPieceLeaf(BlackPieceFactory.createPawn('P'));
         }
     }
 
