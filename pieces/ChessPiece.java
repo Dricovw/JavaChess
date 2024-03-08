@@ -12,7 +12,7 @@ public class ChessPiece implements Piece {
     @Override
     public boolean isValidMove(int startX, int startY, int endX, int endY) {
         // Default implementation for generic chess piece movement
-        // This can be overridden by specific chess pieces
+
         return true;
     }
 

@@ -1,7 +1,4 @@
-import pieces.BlackPieceFactory;
-import pieces.ChessPiece;
-import pieces.PieceFactory;
-import pieces.WhitePieceFactory;
+import pieces.*;
 
 public class PieceMove {
 
@@ -10,7 +7,9 @@ public class PieceMove {
 
         ChessPiece piece = symbolToPiece("" + GameLogic.positionToPiece(squares[0]));
 
-        if (piece != null && piece.isValidMove(
+        System.out.println(piece.getSymbol());
+
+        if (piece != null && PieceMoveAdapter.checkValidMove(
                 chessGame.positionToNumber(squares[0], "row"),
                 chessGame.positionToNumber(squares[0], "column"),
                 chessGame.positionToNumber(squares[1], "row"),
@@ -27,7 +26,6 @@ public class PieceMove {
         return false;
     }
 
-
     public static ChessComponent[][] makeMove(String move, ChessGameFacade chessGame) {
         String[] squares = move.split(" to ");
         int pieceStartRow = chessGame.positionToNumber(squares[0], "row");
@@ -35,7 +33,11 @@ public class PieceMove {
         int pieceEndRow = chessGame.positionToNumber(squares[1], "row");
         int pieceEndColumn = chessGame.positionToNumber(squares[1], "column");
 
-        chessGame.setChessboardValue(pieceEndRow, pieceEndColumn, symbolToPiece("" + GameLogic.positionToPiece(squares[0])));
+        ChessPiece decoratedPiece = symbolToPiece("" + GameLogic.positionToPiece(squares[0]));
+
+//        System.out.println(decoratedPiece);
+
+        chessGame.setChessboardValue(pieceEndRow, pieceEndColumn, decoratedPiece);
         chessGame.setChessboardValue(pieceStartRow, pieceStartColumn, null);
         return chessGame.getChessboard();
     }

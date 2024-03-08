@@ -43,7 +43,7 @@ Its use is now that it simplifies the control of the management and manipulation
 Any part of the system can obtain the reference to the same ChessboardManager instance, promoting consistency and avoiding unnecessary duplication.
 
 ## Command Design Pattern
-The next thing he worked on was the Command design Pattern, its use is to make operations available to be called as objects.
+The next thing Drico worked on was the Command design Pattern, its use is to make operations available to be called as objects.
 These operations are defined in the command interface.
 There are two commands: start and end. The Start command announces that the game has started and the End command announces the winner if the king is taken from either side.
 Some benefits are added flexibility and Decoupling, where the concerns between the sender and receiver are separated.
@@ -51,12 +51,7 @@ In this instance of use, it sets it up to execute various commands.
 When a player makes a move, it checks if one of the kings is no longer on the board and if that is the case, it stops the game and check which one.
 Then the winner will be declared.
 
-## Composite Design pattern
-In this application, the composition design pattern is also used. 
-It has the function of representing complex structures as simpler objects.
-This pattern allows individual objects (components) to be combined into larger structures (composites), forming a tree-like hierarchy.
-In the context of the Chess Game, composition is applied to represent the chessboard, pieces, and their relationships.
-It has the benefits of adding more flexibility and scalability, since the components can easily be added or removed without affecting the structure.
-In this usage, it achieves a modular and flexible structure.
-The chessboard can be easily expanded or modified by adding new types of squares or pieces.
-The hierarchical composition allows for a clear representation of the game elements without making the system overly complex.
+## Adapter Design Pattern
+Drico has also done the Adapter Design Pattern, it's main use is to take the function isValidMove that PieceMove uses to connect the position of the piece
+to the specific rules the piece has to follow. For example: if you want to move a knight, it can only move if it's in a L shape and if you want to move the Queen,
+you can move her in any straight direction. As these rules are different for each piece, the adapter will now automaticcly select which one you need and implement the rules. 
