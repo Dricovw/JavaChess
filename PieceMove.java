@@ -7,8 +7,6 @@ public class PieceMove {
 
         ChessPiece piece = symbolToPiece("" + GameLogic.positionToPiece(squares[0]));
 
-        System.out.println(piece.getSymbol());
-
         if (piece != null && PieceMoveAdapter.checkValidMove(
                 chessGame.positionToNumber(squares[0], "row"),
                 chessGame.positionToNumber(squares[0], "column"),
@@ -34,8 +32,6 @@ public class PieceMove {
         int pieceEndColumn = chessGame.positionToNumber(squares[1], "column");
 
         ChessPiece decoratedPiece = symbolToPiece("" + GameLogic.positionToPiece(squares[0]));
-
-//        System.out.println(decoratedPiece);
 
         chessGame.setChessboardValue(pieceEndRow, pieceEndColumn, decoratedPiece);
         chessGame.setChessboardValue(pieceStartRow, pieceStartColumn, null);
